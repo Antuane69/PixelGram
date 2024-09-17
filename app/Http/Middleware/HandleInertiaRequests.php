@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
+use App\Models\Post;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -35,9 +36,14 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            "greeting" => "Bienvenidos a PixelGram",
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
+            ],
+            "message" => $request->session()->get("message"),
+            "can" => [
+                "post_create" => auth()->user()->can("create",Post::class)
             ],
         ];
     }

@@ -4,6 +4,7 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
+import Toastify from '@/Components/Toastify';
 
 export default function Authenticated({ header, children }) {
     const user = usePage().props.auth.user;
@@ -25,6 +26,9 @@ export default function Authenticated({ header, children }) {
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
+                                </NavLink>
+                                <NavLink href={route('posts.index')} active={route().current('posts.index')}>
+                                    Publicaciones
                                 </NavLink>
                             </div>
                         </div>
@@ -122,6 +126,7 @@ export default function Authenticated({ header, children }) {
             )}
 
             <main>{children}</main>
+            <Toastify/>
         </div>
     );
 }
